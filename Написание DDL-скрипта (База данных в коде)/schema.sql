@@ -8,7 +8,7 @@ CREATE TABLE partners (
     inn           VARCHAR(12)  NOT NULL UNIQUE,
     contact_email VARCHAR(120) UNIQUE,
     phone         VARCHAR(20),
-    rating        DECIMAL(3,2) CHECK (rating BETWEEN 0 AND 5)
+    rating        DECIMAL(4,2) CHECK (rating BETWEEN 0 AND 10)
 );
 
 CREATE TABLE products (
@@ -22,7 +22,7 @@ CREATE TABLE sales (
     product_id   INT           NOT NULL REFERENCES products (product_id) ON DELETE RESTRICT,
     sale_date    DATE          NOT NULL,
     quantity     INT           NOT NULL CHECK (quantity > 0),
-    total_amount DECIMAL(12,2) NOT NULL CHECK (total_amount >= 0)
+    unit_price   DECIMAL(12,4) NOT NULL CHECK (unit_price >= 0)
 );
 
 CREATE INDEX idx_sales_partner ON sales (partner_id);

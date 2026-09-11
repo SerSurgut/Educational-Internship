@@ -16,7 +16,7 @@ digraph ER {
         <TR><TD ALIGN="LEFT">U, NN</TD><TD ALIGN="LEFT">inn</TD><TD ALIGN="LEFT">varchar(12)</TD></TR>
         <TR><TD ALIGN="LEFT">U</TD><TD ALIGN="LEFT">contact_email</TD><TD ALIGN="LEFT">varchar(120)</TD></TR>
         <TR><TD ALIGN="LEFT"> </TD><TD ALIGN="LEFT">phone</TD><TD ALIGN="LEFT">varchar(20)</TD></TR>
-        <TR><TD ALIGN="LEFT"> </TD><TD ALIGN="LEFT">rating</TD><TD ALIGN="LEFT">decimal(3,2)</TD></TR>
+        <TR><TD ALIGN="LEFT"> </TD><TD ALIGN="LEFT">rating</TD><TD ALIGN="LEFT">decimal(4,2)</TD></TR>
       </TABLE>>];
 
     products [label=<
@@ -34,7 +34,7 @@ digraph ER {
         <TR><TD ALIGN="LEFT"><B>FK</B>, NN</TD><TD ALIGN="LEFT">product_id</TD><TD ALIGN="LEFT">int &#8594; products</TD></TR>
         <TR><TD ALIGN="LEFT">NN</TD><TD ALIGN="LEFT">sale_date</TD><TD ALIGN="LEFT">date</TD></TR>
         <TR><TD ALIGN="LEFT">NN</TD><TD ALIGN="LEFT">quantity</TD><TD ALIGN="LEFT">int</TD></TR>
-        <TR><TD ALIGN="LEFT">NN</TD><TD ALIGN="LEFT">total_amount</TD><TD ALIGN="LEFT">decimal(12,2)</TD></TR>
+        <TR><TD ALIGN="LEFT">NN</TD><TD ALIGN="LEFT">unit_price</TD><TD ALIGN="LEFT">decimal(12,4)</TD></TR>
       </TABLE>>];
 
     partners -> sales [arrowhead=ocrow, arrowtail=teetee, dir=both, taillabel="1", headlabel="0..N",

@@ -32,7 +32,7 @@ product_name повторялся в каждой строке отгрузки,
   названии и ИНН, CHECK на рейтинг
 - products: PK на product_id, UNIQUE на product_name
 - sales: PK на sale_id, два FK с ON DELETE RESTRICT, NOT NULL на всех полях,
-  CHECK на количество и сумму
+  CHECK на количество и цену
 
 ON DELETE RESTRICT выбран, чтобы вместе с партнёром не удалилась история
 его отгрузок.

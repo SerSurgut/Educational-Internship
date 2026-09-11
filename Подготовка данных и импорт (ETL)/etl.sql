@@ -26,7 +26,7 @@ INSERT INTO products (product_name)
 SELECT DISTINCT trim(product_name)
 FROM   stg_sales;
 
-INSERT INTO sales (sale_id, partner_id, product_id, sale_date, quantity, total_amount)
+INSERT INTO sales (sale_id, partner_id, product_id, sale_date, quantity, unit_price)
 SELECT s.sale_id::int,
        s.partner_id::int,
        p.product_id,
@@ -35,7 +35,7 @@ SELECT s.sale_id::int,
             ELSE to_date(s.sale_date, 'YYYY-MM-DD')
        END,
        s.quantity::int,
-       s.total_amount::decimal
+       round(s.total_amount::decimal / s.quantity::int, 4)
 FROM   stg_sales s
 JOIN   products p ON p.product_name = trim(s.product_name)
 WHERE  s.partner_id::int IN (SELECT partner_id FROM partners);
