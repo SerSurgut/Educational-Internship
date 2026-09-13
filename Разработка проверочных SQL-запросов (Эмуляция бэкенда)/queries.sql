@@ -13,7 +13,7 @@ INSERT INTO partners (company_name, inn, contact_email, phone, rating)
 VALUES ('ООО "Новый Партнёр"', '7799001122', 'new@partner.ru', '+79012345678', 4.50);
 
 INSERT INTO sales (partner_id, product_id, sale_date, quantity, unit_price)
-VALUES (currval('partners_partner_id_seq'), 1, CURRENT_DATE, 10, 499.00);
+VALUES ((SELECT partner_id FROM partners WHERE inn = '7799001122'), 1, CURRENT_DATE, 10, 499.00);
 
 COMMIT;
 
