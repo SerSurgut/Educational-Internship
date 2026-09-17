@@ -19,6 +19,13 @@ def text_or_dash(value):
     return str(value)
 
 
+def format_phone(phone):
+    if phone is None:
+        return "—"
+    return (f"{phone[:2]} {phone[2:5]} {phone[5:8]} "
+            f"{phone[8:10]} {phone[10:]}")
+
+
 def create_label(parent, text, size):
     return tk.Label(parent, text=text, font=(FONT, size),
                     bg=BACKGROUND, fg=TEXT)
@@ -38,13 +45,14 @@ def create_partner_card(parent, partner):
     card.pack(fill="x", padx=20, pady=(15, 0))
     card.columnconfigure(0, weight=1)
 
-    name = create_label(card, partner["company_name"], 16)
-    name.grid(row=0, column=0, sticky="w")
+    title = (text_or_dash(partner["partner_type"]) + " | "
+             + partner["company_name"])
+    create_label(card, title, 16).grid(row=0, column=0, sticky="w")
     discount = create_label(card, f"{partner['discount']}%", 16)
     discount.grid(row=0, column=1, sticky="e")
-    email = create_label(card, text_or_dash(partner["contact_email"]), 12)
-    email.grid(row=1, column=0, sticky="w")
-    phone = create_label(card, text_or_dash(partner["phone"]), 12)
+    director = create_label(card, text_or_dash(partner["director_name"]), 12)
+    director.grid(row=1, column=0, sticky="w")
+    phone = create_label(card, format_phone(partner["phone"]), 12)
     phone.grid(row=2, column=0, sticky="w")
     rating = "Рейтинг: " + text_or_dash(partner["rating"])
     create_label(card, rating, 12).grid(row=3, column=0, sticky="w")

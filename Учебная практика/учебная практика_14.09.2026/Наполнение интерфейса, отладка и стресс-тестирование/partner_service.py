@@ -4,17 +4,20 @@ from discount import calculate_partner_discount
 
 PARTNER_TOTAL_QUERY = """
 SELECT p.partner_id,
+       t.type_name,
        p.company_name,
+       p.director_name,
        p.inn,
        p.contact_email,
        p.phone,
        p.rating,
        COALESCE(SUM(s.quantity), 0) AS total_quantity
-FROM      partners p
-LEFT JOIN sales    s ON s.partner_id = p.partner_id
+FROM      partners      p
+LEFT JOIN partner_types t ON t.partner_type_id = p.partner_type_id
+LEFT JOIN sales         s ON s.partner_id = p.partner_id
 WHERE     p.partner_id = %s
-GROUP BY  p.partner_id, p.company_name, p.inn,
-          p.contact_email, p.phone, p.rating
+GROUP BY  p.partner_id, t.type_name, p.company_name, p.director_name,
+          p.inn, p.contact_email, p.phone, p.rating
 """
 
 
@@ -32,13 +35,15 @@ def get_partner_with_discount(connection, partner_id):
         return None
     return {
         "partner_id": row[0],
-        "company_name": row[1],
-        "inn": row[2],
-        "contact_email": row[3],
-        "phone": row[4],
-        "rating": row[5],
-        "total_quantity": row[6],
-        "discount": calculate_partner_discount(row[6]),
+        "partner_type": row[1],
+        "company_name": row[2],
+        "director_name": row[3],
+        "inn": row[4],
+        "contact_email": row[5],
+        "phone": row[6],
+        "rating": row[7],
+        "total_quantity": row[8],
+        "discount": calculate_partner_discount(row[8]),
     }
 
 
