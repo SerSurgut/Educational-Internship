@@ -127,9 +127,6 @@ class MainWindow(tk.Tk):
         else:
             partner = get_partner(self.connection, partner_id)
             PartnerEditWindow(self, self.partner_types, partner)
-        # Окно прячется, а не закрывается: список и прокрутка
-        # остаются на месте до возврата из карточки.
-        self.withdraw()
 
 
 if __name__ == "__main__":

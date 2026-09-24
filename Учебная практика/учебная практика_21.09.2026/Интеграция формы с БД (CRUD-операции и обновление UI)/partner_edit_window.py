@@ -68,9 +68,10 @@ class PartnerEditWindow(tk.Toplevel):
             self.title("CRM: Карточка партнера [Редактирование]")
         self.geometry("700x600")
         self.configure(bg=BACKGROUND)
-        # Крестик работает как «Назад», иначе спрятанное главное окно
-        # так и останется невидимым.
-        self.protocol("WM_DELETE_WINDOW", self.go_back)
+        # Карточка модальная: главное окно остаётся на экране под ней,
+        # но не реагирует на клики, пока карточка открыта.
+        self.transient(main_window)
+        self.grab_set()
 
         self.create_form(partner_types)
         if partner is not None:
@@ -158,4 +159,3 @@ class PartnerEditWindow(tk.Toplevel):
 
     def go_back(self):
         self.destroy()
-        self.main_window.deiconify()
